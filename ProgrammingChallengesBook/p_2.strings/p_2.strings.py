@@ -55,12 +55,3 @@ print(WheresWaldorf(mat, "Bambi"))
 print(WheresWaldorf(mat, "Betty"))
 print(WheresWaldorf(mat, "Dagbert"))
 print(WheresWaldorf(mat, "Marcelo"))
-
-# abcDEFGhigg
-# hEbkWalDork
-# FtyAwaldORm
-# FtsimrLqsrc
-# byoArBeDeyv
-# Klcbqwikonk
-# strEBGadhrb
-# yUiqlxenBjf
