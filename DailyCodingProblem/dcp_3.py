@@ -26,11 +26,6 @@ class Node:
         self.left = left
         self.right = right
 
-    def serialize(node):
-        if not node:
-            return 'None'
-        return node.val + ',' + Node.serialize(node.left) + ',' + Node.serialize(node.right)
-
 
 # serialize 
 def serialize(node):
