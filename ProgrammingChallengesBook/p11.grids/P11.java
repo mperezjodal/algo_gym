@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-// Output is not the expected, 
+// Output is not the expected
 
 public class P11 {
     public static void main(java.lang.String[] args)
