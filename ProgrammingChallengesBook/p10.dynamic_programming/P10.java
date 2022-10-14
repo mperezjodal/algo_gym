@@ -1,8 +1,6 @@
 import java.util.*;
 import java.io.*;
 
-// Solved a variant of this problem
-
 public class P10 {
     public static void main(java.lang.String[] args)
             throws IOException, FileNotFoundException, ClassCastException {
