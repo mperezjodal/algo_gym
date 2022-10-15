@@ -1,8 +1,6 @@
 import java.util.*;
 import java.io.*;
 
-// incorrect results
-
 public class P_Graph {
     public static void main(java.lang.String[] args)
             throws IOException, FileNotFoundException, ClassCastException {
@@ -60,16 +58,24 @@ class Edge {
     }
 }
 
+class Path {
+    int level, w;
+    Path(int level, int w) {
+        this.level = level;
+        this.w = w;
+    }
+}
+
 class Graph {
     Map<String, List<Edge>> adjacencyMap;
-    Map<String, Integer[]> costs;
+    Map<String, Path> costs;
     int numberOfLangs;
 
     public Graph(List<String> langs) {
         adjacencyMap = new HashMap<>();
         costs = new HashMap<>();
         for (String l : langs) {
-            costs.put(l, new Integer[] {Integer.MAX_VALUE, Integer.MAX_VALUE});
+            costs.put(l, new Path(Integer.MAX_VALUE, Integer.MAX_VALUE));
         }
         numberOfLangs = langs.size();
     }
@@ -78,15 +84,13 @@ class Graph {
         CostFromBFS("English", 0, 0);
         
         int sum = 0;
-        int thisWeight = 0;
         for (String key : this.costs.keySet()) {
-            thisWeight += this.costs.get(key)[1];
-            System.out.println(key + ", weight: " + thisWeight);
+            int thisWeight = this.costs.get(key).w;
             if (thisWeight == Integer.MAX_VALUE) return "Impossible";
             sum += thisWeight;
         }
 
-        return "" + sum;
+        return sum + "";
     }
 
     public void CostFromBFS(String from, int level, int carryOn) {
@@ -94,26 +98,22 @@ class Graph {
         if (edges == null) return;
         
         for (Edge e : edges) {
-            Integer[] thisCost = this.costs.get(e.dest);
-            System.out.println(from + " -> " + e.dest + ", level: " + level + ", carryOn: " + carryOn + ", cost: " + e.weight);
-            if (level <= thisCost[0]) {
+            Path thisCost = this.costs.get(e.dest);
+            if (level <= thisCost.level) {
                 int newWeight = e.weight + carryOn;
-                
-                if (newWeight < thisCost[1]) {
-                    this.costs.put(e.dest, new Integer[] {level, newWeight});
-                    System.out.println("Update " + e.dest + ", level: " + level + ", carryOn: " + carryOn + ", newWeight: " + newWeight);
-                }
+                if (newWeight < thisCost.w)
+                    this.costs.put(e.dest, new Path(level, newWeight));
             }
         }
 
         boolean cont = false;
         for (String key : this.costs.keySet()) 
-            if (this.costs.get(key)[1] == Integer.MAX_VALUE) cont = true;
+            if (this.costs.get(key).w == Integer.MAX_VALUE) cont = true;
 
         if (cont)
             for (Edge e : edges) {
                 int weight = 0;
-                if (from != "English" && this.costs.get(from)[1] == Integer.MAX_VALUE) weight = e.weight;
+                if (from != "English" && this.costs.get(from).w == Integer.MAX_VALUE) weight = e.weight;
                 CostFromBFS(e.dest, level + 1, carryOn + weight);
             }
                 
