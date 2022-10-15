@@ -26,14 +26,11 @@ class Node:
         self.left = left
         self.right = right
 
-
-# serialize 
 def serialize(node):
     if not node:
         return 'None'
     return node.val + ',' + serialize(node.left) + ',' + serialize(node.right)
 
-# deserialize
 def deserialize(s, node=None):
     if not s:
         return None
@@ -49,7 +46,6 @@ def deserialize(s, node=None):
     s.pop(0)
     node.right = deserialize(s)
     return node
-        
 
 node = Node('root', Node('left', Node('left.left')), Node('right'))
 assert deserialize(serialize(node)).left.left.val == 'left.left'

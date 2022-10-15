@@ -3,7 +3,7 @@ import java.io.*;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 
-public class P {
+public class P_PKs {
     public static void main(java.lang.String[] args) throws IOException, FileNotFoundException, ClassCastException {
         FileReader fr = new FileReader("./input.txt");
         BufferedReader br = new BufferedReader(fr);
