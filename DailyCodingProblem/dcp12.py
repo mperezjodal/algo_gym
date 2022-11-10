@@ -24,4 +24,4 @@ def climb_stairs(n):
 
     return nums[n-1]
 
-print(climb_stairs(5))
+assert(climb_stairs(5) == 5)
